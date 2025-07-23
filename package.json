@@ -1,0 +1,30 @@
+{
+  "name": "08-fitchallenge",
+  "version": "1.0.0",
+  "description": "Système de gestion de salles d'entraînement et défis sportifs",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc && node dist/index.js"
+  },
+  "keywords": [
+    "fitness",
+    "challenges",
+    "gym",
+    "sports"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.3"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.11.96",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.13",
+    "typescript": "^5.8.3"
+  }
+}

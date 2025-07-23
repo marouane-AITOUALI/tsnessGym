@@ -1,0 +1,10 @@
+services:
+  fitchallenge_mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27500:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: esgi
+      MONGO_INITDB_ROOT_PASSWORD: true5ecur3
+      MONGO_INITDB_DATABASE: fitchallenge

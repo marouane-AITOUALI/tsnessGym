@@ -7,6 +7,7 @@ import {
   GymController,
   TypeExerciseController,
   BadgeController,
+  ChallengeController,
 } from "./controllers";
 import {
   UserService,
@@ -14,6 +15,8 @@ import {
   GymService,
   TypeExerciseService,
   BadgeService,
+  ChallengeService,
+  ParticipationService,
 } from "./services/mongoose";
 import { sessionMiddleware } from "./middlewares";
 import { UserRole } from "./models";
@@ -66,6 +69,8 @@ async function main() {
     const gymService = new GymService(connection);
     const typeExerciseService = new TypeExerciseService(connection);
     const badgeService = new BadgeService(connection);
+    const challengeService = new ChallengeService(connection);
+    const participationService = new ParticipationService(connection);
 
     // Initialisation du Super Admin (première fois seulement)
     await initializeSuperAdmin(userService);
@@ -79,6 +84,14 @@ async function main() {
       sessionService
     );
     const badgeController = new BadgeController(badgeService, sessionService);
+    const challengeController = new ChallengeController(
+      challengeService,
+      participationService,
+      sessionService,
+      userService,
+      badgeService,
+      gymService
+    );
 
     // Configuration d'Express
     const app = express();
@@ -93,6 +106,7 @@ async function main() {
     app.use("/api/gyms", gymController.buildRouter());
     app.use("/api/type-exercises", typeExerciseController.buildRouter());
     app.use("/api/badges", badgeController.buildRouter());
+    app.use("/api/challenges", challengeController.buildRouter());
 
     // Route de santé
     app.get("/health", (req, res) => {

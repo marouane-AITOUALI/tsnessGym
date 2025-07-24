@@ -211,6 +211,32 @@ export class UserService {
       .exec();
   }
 
+  async updateUserStats(userId: string, stats: {
+    challengesCompleted?: number;
+    totalCaloriesBurned?: number;
+    streakDays?: number;
+    lastActivityDate?: Date;
+  }): Promise<User | null> {
+    const updateData: any = {};
+    
+    if (stats.challengesCompleted !== undefined) {
+      updateData.$inc = { challengesCompleted: stats.challengesCompleted };
+    }
+    if (stats.totalCaloriesBurned !== undefined) {
+      updateData.$inc = { ...updateData.$inc, totalCaloriesBurned: stats.totalCaloriesBurned };
+    }
+    if (stats.streakDays !== undefined) {
+      updateData.streakDays = stats.streakDays;
+    }
+    if (stats.lastActivityDate !== undefined) {
+      updateData.lastActivityDate = stats.lastActivityDate;
+    }
+
+    return this.userModel
+      .findByIdAndUpdate(userId, updateData, { new: true })
+      .exec();
+  }
+
   async getUserStats(): Promise<any> {
     const totalUsers = await this.userModel.countDocuments().exec();
     const activeUsers = await this.userModel

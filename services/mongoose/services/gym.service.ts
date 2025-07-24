@@ -47,6 +47,12 @@ export class GymService {
       .populate("createdBy", "firstName lastName email");
   }
 
+  async getGymByOwnerId(ownerId: string): Promise<Gym | null> {
+    return this.gymModel
+      .findOne({ ownerId })
+      .populate("createdBy", "firstName lastName email");
+  }
+
   async getPendingGyms(): Promise<Gym[]> {
     return this.gymModel
       .find({ status: GymStatus.PENDING })

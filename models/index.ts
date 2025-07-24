@@ -6,4 +6,5 @@ export * from "./typeExercise.interface";
 export * from "./badge.interface";
 export * from "./challenge.interface";
 export * from "./participation.interface";
+export * from "./invitation.interface";
 export * from "./timestamps";

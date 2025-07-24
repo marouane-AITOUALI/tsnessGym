@@ -243,7 +243,18 @@ export class ChallengeController {
       // Vérifier que la participation appartient à l'utilisateur
       const participation =
         await this.participationService.getParticipationById(participationId);
-      if (!participation || participation.userId.toString() !== req.user._id) {
+      
+      if (!participation) {
+        res.status(404).json({ error: "Participation not found" });
+        return;
+      }
+      
+      // Vérifier si userId est populé (objet) ou simple ID (string)
+      const participationUserId = (participation.userId as any)._id 
+        ? (participation.userId as any)._id.toString() 
+        : participation.userId.toString();
+      
+      if (participationUserId !== req.user._id.toString()) {
         res.status(404).json({ error: "Participation not found" });
         return;
       }

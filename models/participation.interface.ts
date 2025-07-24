@@ -55,6 +55,8 @@ export interface ChallengeParticipation extends Document, Timestamps {
   
   // Social
   isPublic: boolean; // si les stats sont publiques
+  invitedBy?: string; // ID de l'utilisateur qui a invité
+  teamId?: string; // ID de l'équipe
   notes?: string;
   
   // Récompenses obtenues

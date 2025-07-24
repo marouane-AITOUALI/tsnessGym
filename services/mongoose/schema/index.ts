@@ -5,3 +5,4 @@ export * from "./typeExercise.schema";
 export * from "./badge.schema";
 export * from "./challenge.schema";
 export * from "./participation.schema";
+export * from "./invitation.schema";

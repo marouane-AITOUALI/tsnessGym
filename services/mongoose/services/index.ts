@@ -5,3 +5,4 @@ export * from "./typeExercise.service";
 export * from "./badge.service";
 export * from "./challenge.service";
 export * from "./participation.service";
+export * from "./invitation.service";

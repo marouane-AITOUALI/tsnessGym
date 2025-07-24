@@ -68,7 +68,7 @@ export function challengeSchema(): Schema {
       status: {
         type: String,
         enum: Object.values(ChallengeStatus),
-        default: ChallengeStatus.DRAFT,
+        default: ChallengeStatus.ACTIVE,
       },
       duration: {
         type: Number,

@@ -23,9 +23,6 @@ export function participationSchema(): Schema {
         type: Date,
         default: Date.now,
       },
-      completedAt: {
-        type: Date,
-      },
       progress: {
         type: Number,
         default: 0,
@@ -45,14 +42,20 @@ export function participationSchema(): Schema {
                 ref: "TypeExercise",
                 required: true,
               },
-              sets: { type: Number, required: true },
-              reps: { type: Number, required: true },
-              weight: { type: Number },
+              sets: { type: Number },
+              reps: { type: Number },
               duration: { type: Number },
+              weight: { type: Number },
               distance: { type: Number },
+              caloriesBurned: { type: Number },
+              completed: { type: Boolean, default: false },
             },
           ],
-          caloriesBurned: {
+          totalDuration: {
+            type: Number,
+            default: 0,
+          },
+          totalCalories: {
             type: Number,
             default: 0,
           },
@@ -62,9 +65,43 @@ export function participationSchema(): Schema {
           },
         },
       ],
-      totalCaloriesBurned: {
+      // Statistiques globales
+      totalWorkouts: {
         type: Number,
         default: 0,
+      },
+      totalDuration: {
+        type: Number,
+        default: 0,
+      },
+      totalCalories: {
+        type: Number,
+        default: 0,
+      },
+      // Dates importantes
+      startedAt: {
+        type: Date,
+      },
+      completedAt: {
+        type: Date,
+      },
+      // Social et configuration
+      isPublic: {
+        type: Boolean,
+        default: true,
+      },
+      pointsEarned: {
+        type: Number,
+        default: 0,
+      },
+      // Records personnels
+      personalBest: {
+        type: {
+          type: String, // "time", "weight", "reps", etc.
+        },
+        value: { type: Number },
+        unit: { type: String },
+        achievedAt: { type: Date },
       },
       badgesEarned: [
         {
@@ -78,12 +115,6 @@ export function participationSchema(): Schema {
       },
       teamId: {
         type: String,
-      },
-      personalBest: {
-        weight: { type: Number },
-        reps: { type: Number },
-        time: { type: Number },
-        distance: { type: Number },
       },
     },
     {
